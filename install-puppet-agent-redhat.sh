@@ -20,6 +20,7 @@ else
 fi
 
 rpm -ivh http://yum.puppetlabs.com/el/`cat /etc/system-release-cpe | cut -d: -f5`/products/i386/puppetlabs-release-`cat /etc/system-release-cpe | cut -d: -f5`-7.noarch.rpm
+yum clean all
 yum install puppet -y
 if grep -q "84\.53\.103\.71" /etc/hosts; then 
 	echo puppet master is already in hosts file; 
@@ -27,6 +28,5 @@ else
 	echo "84.53.103.71    puppet.maxserv.com puppet" >> /etc/hosts;
 	echo puppet master added to hosts file; 
 fi
-puppet agent --test
-sed -i 's/START=no/START=yes/g' /etc/default/puppet
+puppet agent --waitforcert 60 --test
 /etc/init.d/puppet start
