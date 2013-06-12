@@ -1,13 +1,14 @@
 #!/bin.bash
-if command -v wget > /dev/null 2>&1; then
-	echo wget is already installed;
+if command -v curl > /dev/null 2>&1; then
+	echo curl is already installed;
 else
-	apt-get install wget;
+	echo installing prerequisite curl;
+	apt-get install curl;
 fi
 wget http://apt.puppetlabs.com/puppetlabs-release-`lsb_release -sc`.deb
 dpkg -i puppetlabs-release-`lsb_release -sc`.deb
 apt-get update
-apt-get install puppet
+apt-get install puppet -y
 if grep -q "84\.53\.103\.71" /etc/hosts; then 
 	echo puppet master is already in hosts file; 
 else 
