@@ -1,4 +1,16 @@
 #!/bin.bash
+if pgrep puppet > /dev/null 2>&1; then 
+	echo puppet is already running, not good, bye.; 
+	exit 1;
+else 
+	echo puppet is not running, good.;
+	if dpkg -l puppet >/dev/null 2>&1; then 
+		echo puppet is already installed, not good, bye.; 
+		exit 1; 
+	else 
+		echo puppet is not yet installed, good.; 
+	fi
+fi
 if command -v wget > /dev/null 2>&1; then
 	echo wget is already installed;
 else
