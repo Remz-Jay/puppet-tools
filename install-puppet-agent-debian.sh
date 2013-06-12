@@ -1,4 +1,4 @@
-#!/bin.bash
+#!/bin/bash
 if pgrep puppet > /dev/null 2>&1; then 
 	echo puppet is already running, not good, bye.; 
 	exit 1;
