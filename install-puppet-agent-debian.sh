@@ -1,9 +1,9 @@
 #!/bin.bash
-if command -v curl > /dev/null 2>&1; then
-	echo curl is already installed;
+if command -v wget > /dev/null 2>&1; then
+	echo wget is already installed;
 else
-	echo installing prerequisite curl;
-	apt-get install curl;
+	echo installing prerequisite wget;
+	apt-get install wget;
 fi
 wget http://apt.puppetlabs.com/puppetlabs-release-`lsb_release -sc`.deb
 dpkg -i puppetlabs-release-`lsb_release -sc`.deb
