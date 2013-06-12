@@ -11,12 +11,14 @@ else
 		echo puppet is not yet installed, good.; 
 	fi
 fi
-if [ ! -f /etc/system-release-cpe ] then
+
+if [ ! -f /etc/system-release-cpe ]; then
 	echo "Cannot determine OS release/version, not good.";
 	exit 1;
 else
-	echo "Installing for: `cat /etc/system-release-cpe`"
+	echo "Installing for: `cat /etc/system-release-cpe`";
 fi
+
 rpm -ivh http://yum.puppetlabs.com/el/`cat /etc/system-release-cpe | cut -d: -f5`/products/i386/puppetlabs-release-`cat /etc/system-release-cpe | cut -d: -f5`-7.noarch.rpm
 yum install puppet -y
 if grep -q "84\.53\.103\.71" /etc/hosts; then 
