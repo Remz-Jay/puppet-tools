@@ -17,6 +17,13 @@ else
 	echo installing prerequisite wget;
 	apt-get install wget;
 fi
+if command -v lsb_release > /dev/null 2>&1; then
+	echo "installing for:";
+	lsb_release -a
+else
+	echo "Can't determine OS/release. Are you on lenny?";
+	exit 1;
+fi
 wget http://apt.puppetlabs.com/puppetlabs-release-`lsb_release -sc`.deb
 dpkg -i puppetlabs-release-`lsb_release -sc`.deb
 apt-get update
