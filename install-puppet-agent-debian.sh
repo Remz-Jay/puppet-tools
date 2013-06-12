@@ -33,6 +33,6 @@ else
 	echo "84.53.103.71    puppet.maxserv.com puppet" >> /etc/hosts;
 	echo puppet master added to hosts file; 
 fi
-puppet agent --test
+puppet agent --waitforcert 60 --test
 sed -i 's/START=no/START=yes/g' /etc/default/puppet
 /etc/init.d/puppet start
