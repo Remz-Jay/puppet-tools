@@ -16,7 +16,7 @@ if command -v lsb_release > /dev/null 2>&1; then
 			echo "installing for:";
 			lsb_release -a;
 			VERSION=`lsb_release -sr | cut -d. -f1`;
-			MINOR=`lsb_release -sr | cut -d. -f1`;
+			MINOR=`lsb_release -sr | cut -d. -f2`;
 else
 		if [ ! -f /etc/system-release-cpe ]; then	
 			echo "Cannot determine OS release/version, not good.";
