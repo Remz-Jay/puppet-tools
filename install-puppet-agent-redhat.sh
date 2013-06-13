@@ -12,19 +12,19 @@ else
 	fi
 fi
 MINOR=7
-if [ ! -f /etc/system-release-cpe ]; then
-	if command -v lsb_release > /dev/null 2>&1; then
+if command -v lsb_release > /dev/null 2>&1; then
 			echo "installing for:";
 			lsb_release -a;
 			VERSION=`lsb_release -sr | cut -d. -f1`;
 			MINOR=`lsb_release -sr | cut -d. -f1`;
-	else
+else
+		if [ ! -f /etc/system-release-cpe ]; then	
 			echo "Cannot determine OS release/version, not good.";
 			exit 1;
-	fi
-else
-	echo "Installing for: `cat /etc/system-release-cpe`";
-	VERSION=`cat /etc/system-release-cpe | cut -d: -f5`
+		else
+			echo "Installing for: `cat /etc/system-release-cpe`";
+			VERSION=`cat /etc/system-release-cpe | cut -d: -f5`
+		fi
 fi
 
 rpm -ivh http://yum.puppetlabs.com/el/${VERSION}/products/i386/puppetlabs-release-${VERSION}-${MINOR}.noarch.rpm
