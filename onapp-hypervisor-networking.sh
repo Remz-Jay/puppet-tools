@@ -11,9 +11,12 @@ echo $MAC0
 echo $MAC1
 #exit
 
-echo -e 'DEVICE=bond0
+echo -e "alias bond0 bonding
+options bond0 miimon=100 mode=1">>/etc/modprobe.d/bonding.conf
+
+echo -e "DEVICE=bond0
 TYPE=BOND
-BONDING_OPTS="miimon=100 mode=1"'>$CONFPATH/ifcfg-bond0
+BONDING_OPTS=\"miimon=100 mode=1\"">$CONFPATH/ifcfg-bond0
 
 echo -e "DEVICE=eth0
 HWADDR=${MAC0}
@@ -55,12 +58,15 @@ TYPE=Ethernet
 IPADDR=10.30.30.${MYNUM}
 NETMASK=255.255.255.0">>$CONFPATH/ifcfg-vlan5
 
-ifdown MGT
-ifdown eth0
-ifdown eth1
-ifup eth0
-ifup eth1
-ifup bond0
-ifup vlan3
-ifup vlan4
-ifup vlan5
+rm $CONFPATH/ifcfg-MGT
+service network restart
+
+#ifdown MGT
+#ifdown eth0
+#ifdown eth1
+#ifup eth0
+#ifup eth1
+#ifup bond0
+#ifup vlan3
+#ifup vlan4
+#ifup vlan5
