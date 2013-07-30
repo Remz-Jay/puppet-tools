@@ -22,7 +22,10 @@ options bond0 miimon=100 mode=1">>/etc/modprobe.d/bonding.conf
 
 echo -e "DEVICE=bond0
 TYPE=BOND
-BONDING_OPTS=\"miimon=100 mode=1\"">$CONFPATH/ifcfg-bond0
+BONDING_OPTS=\"miimon=100 mode=1\"
+BOOTPROTO=static
+IPADDR=10.10.10.${MYNUM}
+NETMASK=255.255.255.0">$CONFPATH/ifcfg-bond0
 
 echo -e "DEVICE=eth0
 HWADDR=${MAC0}
@@ -34,15 +37,15 @@ HWADDR=${MAC1}
 MASTER=bond0
 SLAVE=yes">>$CONFPATH/ifcfg-eth1
 
-echo -e "VLAN=yes
-VLAN_NAME_TYPE=VLAN_PLUS_VID_NO_PAD
-DEVICE=vlan3
-PHYSDEV=bond0
-BOOTPROTO=static
-ONBOOT=yes
-TYPE=Ethernet
-IPADDR=10.10.10.${MYNUM}
-NETMASK=255.255.255.0">>$CONFPATH/ifcfg-vlan3
+#echo -e "VLAN=yes
+#VLAN_NAME_TYPE=VLAN_PLUS_VID_NO_PAD
+#DEVICE=vlan3
+#PHYSDEV=bond0
+#BOOTPROTO=static
+#ONBOOT=yes
+#TYPE=Ethernet
+#IPADDR=10.10.10.${MYNUM}
+#NETMASK=255.255.255.0">>$CONFPATH/ifcfg-vlan3
 
 echo -e "VLAN=yes
 VLAN_NAME_TYPE=VLAN_PLUS_VID_NO_PAD
