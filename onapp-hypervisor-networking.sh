@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/sbin/env bash
 
 CONFPATH="/etc/sysconfig/network-scripts"
 
