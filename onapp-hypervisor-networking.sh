@@ -11,6 +11,12 @@ echo $MAC0
 echo $MAC1
 #exit
 
+mkdir /sbin2
+mount /dev/shm -t tmpfs /sbin2
+cp -R /sbin/* /sbin2/
+mv /sbin /sbin3
+/sbin2/ln -s /sbin2 /sbin
+
 echo -e "alias bond0 bonding
 options bond0 miimon=100 mode=1">>/etc/modprobe.d/bonding.conf
 
@@ -58,8 +64,13 @@ TYPE=Ethernet
 IPADDR=10.30.30.${MYNUM}
 NETMASK=255.255.255.0">>$CONFPATH/ifcfg-vlan5
 
+ifconfig MGT down
 rm $CONFPATH/ifcfg-MGT
 service network restart
+
+rm /sbin
+/sbin2/mv /sbin3 /sbin
+umount /sbin2
 
 #ifdown MGT
 #ifdown eth0
