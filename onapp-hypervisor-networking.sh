@@ -9,7 +9,6 @@ MAC1=$(ifconfig eth1 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}')
 echo $MYNUM
 echo $MAC0
 echo $MAC1
-#exit
 
 mkdir /sbin2
 mount /dev/shm -t tmpfs /sbin2
@@ -46,6 +45,14 @@ SLAVE=yes">>$CONFPATH/ifcfg-eth1
 #TYPE=Ethernet
 #IPADDR=10.10.10.${MYNUM}
 #NETMASK=255.255.255.0">>$CONFPATH/ifcfg-vlan3
+
+echo -e "VLAN=yes
+VLAN_NAME_TYPE=VLAN_PLUS_VID_NO_PAD
+DEVICE=vlan2
+PHYSDEV=bond0
+BOOTPROTO=none
+ONBOOT=no
+TYPE=Ethernet">>$CONFPATH/ifcfg-vlan2
 
 echo -e "VLAN=yes
 VLAN_NAME_TYPE=VLAN_PLUS_VID_NO_PAD
