@@ -30,11 +30,15 @@ fi
 rpm -ivh http://yum.puppetlabs.com/el/${VERSION}/products/i386/puppetlabs-release-${VERSION}-${MINOR}.noarch.rpm
 yum clean all
 yum install puppet -y
-if grep -q "84\.53\.103\.71" /etc/hosts; then 
-	echo puppet master is already in hosts file; 
-else 
-	echo "84.53.103.71    puppet.maxserv.com puppet" >> /etc/hosts;
-	echo puppet master added to hosts file; 
+if grep -q "84\.53\.103\.71" /etc/hosts; then
+	echo removing reference to old puppet master;
+	sed -i '/84.53.103.71/d' /etc/hosts
+fi
+if grep -q "149\.210\.174\.225" /etc/hosts; then
+	echo puppet master is already in hosts file;
+else
+	echo "149.210.174.225    puppet.maxserv.com puppet" >> /etc/hosts;
+	echo puppet master added to hosts file;
 fi
 puppet agent --waitforcert 60 --test
 /etc/init.d/puppet start
