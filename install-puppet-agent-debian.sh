@@ -23,6 +23,10 @@ if command -v lsb_release > /dev/null 2>&1; then
 else
 	apt-get install lsb-release -y
 fi
+# Fix the OnApp network bug:
+MYIP=$(ifconfig eth0 | grep -o -E 'addr:[[:xdigit:]]{1,3}\.[[:xdigit:]]{1,3}\.[[:xdigit:]]{1,3}\.[[:xdigit:]]{1,3}' | sed -r 's/^.{5}//')
+ip rule del from $MYIP table eth0_if
+
 wget http://apt.puppetlabs.com/puppetlabs-release-`lsb_release -sc`.deb
 dpkg -i puppetlabs-release-`lsb_release -sc`.deb
 apt-get update
