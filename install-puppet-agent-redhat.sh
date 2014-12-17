@@ -4,7 +4,7 @@ if pgrep puppet > /dev/null 2>&1; then
 	exit 1;
 else 
 	echo puppet is not running, good.;
-	if rpm -qa | grep puppet > /dev/null 2>&1; then 
+	if rpm -qa | grep "puppet-" > /dev/null 2>&1; then 
 		echo puppet is already installed, not good, bye.; 
 		exit 1; 
 	else 
