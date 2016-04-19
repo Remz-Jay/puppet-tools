@@ -1,6 +1,5 @@
 #!/bin/bash
-
-# TODO: Make sure pkg is installed and install it unattended otherwise
+env ASSUME_ALWAYS_YES=YES pkg bootstrap
 
 # PUPPET INSTALL/RUN DETECTION
 if pgrep ruby21 > /dev/null 2>&1; then
