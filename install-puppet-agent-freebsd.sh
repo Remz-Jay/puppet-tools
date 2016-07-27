@@ -2,7 +2,7 @@
 env ASSUME_ALWAYS_YES=YES pkg bootstrap
 
 # PUPPET INSTALL/RUN DETECTION
-if pgrep ruby21 > /dev/null 2>&1; then
+if pgrep ruby22 > /dev/null 2>&1; then
         echo puppet is already running, not good, bye.;
         exit 1;
 else
@@ -16,7 +16,7 @@ else
 fi
 
 # INSTALL PUPPET
-pkg install -y puppet38
+pkg install -y sysutils/puppet38
 
 # CONFIGURE PUPPET MASTER HINTS
 if grep -q "84\.53\.103\.71" /etc/hosts; then
