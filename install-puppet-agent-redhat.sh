@@ -21,8 +21,8 @@ if command -v lsb_release > /dev/null 2>&1; then
 			VERSION=`lsb_release -sr | cut -d. -f1`;
 else
         # Puppet agent needs this. But we can use system-release-cp for version determination too.
-        yum install redhat-lsb-core -y
-        
+		yum install redhat-lsb-core -y
+
 		if [ ! -f /etc/system-release-cpe ]; then
 			echo "Cannot determine OS release/version, not good.";
 			exit 1;
