@@ -20,7 +20,16 @@ if command -v lsb_release > /dev/null 2>&1; then
 			lsb_release -a;
 			VERSION=`lsb_release -sr | cut -d. -f1`;
 else
-		yum install redhat-lsb-core
+        # Puppet agent needs this. But we can use system-release-cp for version determination too.
+        yum install redhat-lsb-core -y
+        
+		if [ ! -f /etc/system-release-cpe ]; then
+			echo "Cannot determine OS release/version, not good.";
+			exit 1;
+		else
+			echo "Installing for: `cat /etc/system-release-cpe`";
+			VERSION=`cat /etc/system-release-cpe | cut -d: -f5`
+		fi
 fi
 
 # CLOUD-INIT HOSTNAME PRESERVATION
