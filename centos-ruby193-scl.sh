@@ -4,7 +4,7 @@ if ruby -v | grep "1.8" > /dev/null 2>&1; then
 	yum install -y centos-release-scl;
 	yum install -y ruby193;
 	yum install -y ruby193-ruby-devel;
-	echo "-----> Enabling ruby2193";
+	echo "-----> Enabling ruby193";
 	source /opt/rh/ruby193/enable;
 	echo "/opt/rh/ruby193/root/usr/lib64" | tee -a /etc/ld.so.conf;
 	ldconfig;
@@ -22,6 +22,7 @@ if ruby -v | grep "1.8" > /dev/null 2>&1; then
 	else
 		echo Still not running Ruby 1.9. Something went wrong. HALP!;
 		exit 1;
+	fi
 else 
 	echo Ruby is not 1.8. Dont know what to do. Exit.;
 	exit 1;
