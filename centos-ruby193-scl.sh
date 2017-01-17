@@ -19,6 +19,9 @@ if ruby -v | grep "1.8" > /dev/null 2>&1; then
 		yum install -y puppet
 		gem uninstall puppet -v 4.8.1
 		puppet -V
+		echo "Restarting Puppet to activate the new Ruby."
+		/etc/init.d/puppet stop
+		/etc/init.d/puppet start
 	else
 		echo Still not running Ruby 1.9. Something went wrong. HALP!;
 		exit 1;
