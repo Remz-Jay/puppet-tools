@@ -15,13 +15,14 @@ else
 fi
 
 # VERSION DETECTION
-MINOR=11
 if command -v lsb_release > /dev/null 2>&1; then
 			echo "installing for:";
 			lsb_release -a;
 			VERSION=`lsb_release -sr | cut -d. -f1`;
-			MINOR=`lsb_release -sr | cut -d. -f2`;
 else
+        # Puppet agent needs this. But we can use system-release-cp for version determination too.
+		yum install redhat-lsb-core -y
+
 		if [ ! -f /etc/system-release-cpe ]; then
 			echo "Cannot determine OS release/version, not good.";
 			exit 1;
@@ -57,7 +58,7 @@ else
 fi
 
 # INSTALL PUPPET
-rpm -ivh http://yum.puppetlabs.com/el/${VERSION}/products/`uname -i`/puppetlabs-release-${VERSION}-${MINOR}.noarch.rpm
+rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-${VERSION}.noarch.rpm
 yum clean all
 yum install puppet -y
 
